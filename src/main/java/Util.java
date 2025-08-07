@@ -72,7 +72,7 @@ public class Util {
      * @return given a Patient p, extract the first given name of its first name element, in other words, to extract p.name[0].given[0]
      * return empty string if first given name is not existing.
      */
-    static String extractFirstName(final Patient p) {
+    public static String extractFirstName(final Patient p) {
         final String firstName = Optional.ofNullable(p)
                 .map(Patient::getName)
                 .orElse(ImmutableList.of())
@@ -87,7 +87,7 @@ public class Util {
     }
 
 
-    static String extractLastName(final Patient p) {
+    public static String extractLastName(final Patient p) {
         final String lastName = Optional.ofNullable(p)
                 .map(Patient::getName)
                 .orElse(ImmutableList.of())
@@ -105,7 +105,7 @@ public class Util {
         return Optional.ofNullable(localDate).map(ld -> Date.from(ld.atStartOfDay(ZoneId.systemDefault()).toInstant())).orElse(null);
     }
 
-    static String extractDob(final Patient p) {
+    public static String extractDob(final Patient p) {
         final String dob = Optional.ofNullable(p)
                 .map(Patient::getBirthDate)
                 .flatMap(d -> Optional.ofNullable(dateToLocalDate(d)).map(ld -> ld.format(DATE_FORMAT)))
