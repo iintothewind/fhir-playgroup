@@ -9,10 +9,10 @@
             <pattern>%d{HH:mm:ss.SSS} %-5level %logger{36} - %msg%n</pattern>
         </encoder>
     </appender>
-
     <logger name="ca.cdr.site.server.AccessLogFilter" additivity="false" level="info">
         <appender-ref ref="STDOUT"/>
     </logger>
+
 
     <root level="INFO">
         <appender-ref ref="STDOUT"/>
