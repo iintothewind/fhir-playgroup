@@ -70,7 +70,10 @@ public class SampleClient {
         log.info("searchPatientsFromFile, filePath: {}", filePath);
 
         final List<String> lastNames = Util.readLines(filePath);
-        final List<Patient> patients = lastNames.stream().flatMap(name -> searchPatientsByLastName(client, name).stream()).collect(Collectors.toList());
+        final List<Patient> patients = lastNames.stream()
+                .flatMap(name -> searchPatientsByLastName(client, name).stream())
+                .sorted(Comparator.comparing(Util::extractLastName).thenComparing(Util::extractFirstName))
+                .collect(Collectors.toList());
         return patients;
     }
 
@@ -90,7 +93,10 @@ public class SampleClient {
         log.info("searchPatientsFromFile, filePath: {}", filePath);
 
         final List<String> lastNames = Util.readLines(filePath);
-        final List<Patient> patients = lastNames.stream().flatMap(name -> cacheLoadPatients(name).stream()).collect(Collectors.toList());
+        final List<Patient> patients = lastNames.stream()
+                .flatMap(name -> cacheLoadPatients(name).stream())
+                .sorted(Comparator.comparing(Util::extractLastName).thenComparing(Util::extractFirstName))
+                .collect(Collectors.toList());
         return patients;
     }
 
